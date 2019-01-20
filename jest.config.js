@@ -11,5 +11,5 @@ module.exports = {
     '@src/(.*)': '<rootDir>/src/src/$1',
     '@state/(.*)': '<rootDir>/src/app/state/$1',
   },
-  transformIgnorePatterns: ['node_modules/(?!(jest-test))'],
+  transformIgnorePatterns: ['node_modules/(?!(jest-test|lodash-es))'],
 };
