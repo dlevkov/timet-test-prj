@@ -7,7 +7,7 @@ import { LogicService } from '../logic.service';
   templateUrl: './task-add.component.html',
   styleUrls: ['./task-add.component.scss'],
 })
-export class TaskAddComponent implements OnInit {
+export class TaskAddComponent {
   form: FormGroup;
   constructor(private fb: FormBuilder, private service: LogicService) {
     this.form = this.fb.group({
@@ -15,7 +15,6 @@ export class TaskAddComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
   submitHandler() {
     this.service.addTask(this.form.value.text);
     this.form.reset();

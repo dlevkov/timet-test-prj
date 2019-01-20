@@ -37,13 +37,20 @@ export class LogicService {
     tasks: TaskModel[],
     selectedId: number
   ): TaskModel[] {
-    tasks.forEach(x => this.toggleText(x));
+    tasks.forEach(x => this.inactivateButtons(x));
     this.toggleText(tasks[selectedId]);
     return tasks;
+  }
+  private inactivateButtons(x: TaskModel): void {
+    if (x.buttonText === 'pause') {
+      x.buttonText = 'play_arrow';
+    }
   }
   private toggleText(x: TaskModel): void {
     if (x.buttonText === 'pause') {
       x.buttonText = 'play_arrow';
+    } else {
+      x.buttonText = 'pause';
     }
   }
 

@@ -1,16 +1,12 @@
 <mat-card class="card-width ">
-  <mat-card-content>
-    <mat-form-field>
-      <form [formGroup]="form" (submit)="submitHandler()">
-        <input
-          matInput
-          placeholder="New Task"
-          formControlName="text"
-          type="text"
-        />
-      </form>
-    </mat-form-field>
-    <mat-card-actions>
+  <mat-form-field>
+    <form [formGroup]="form" (submit)="submitHandler()">
+      <input
+        matInput
+        placeholder="New Task"
+        formControlName="text"
+        type="text"
+      />
       <button
         color="primary"
         mat-raised-button
@@ -19,6 +15,7 @@
       >
         Add
       </button>
-    </mat-card-actions>
-  </mat-card-content>
+    </form>
+  </mat-form-field>
+
 </mat-card>

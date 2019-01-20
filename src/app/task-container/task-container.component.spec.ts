@@ -1,10 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskContainerComponent } from './task-container.component';
-import { TaskPresenterComponent } from '../task-presenter/task-presenter.component';
 import { LogicService } from '../logic.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MinuteSecondsPipe } from '../minute-seconds.pipe';
 
 describe('TaskContainerComponent', () => {
   let component: TaskContainerComponent;
