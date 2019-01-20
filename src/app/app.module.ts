@@ -9,13 +9,15 @@ import { TaskContainerComponent } from './task-container/task-container.componen
 import { TaskPresenterComponent } from './task-presenter/task-presenter.component';
 import { TaskAddComponent } from './task-add/task-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MinuteSecondsPipe } from './minute-seconds.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskContainerComponent,
     TaskPresenterComponent,
-    TaskAddComponent
+    TaskAddComponent,
+    MinuteSecondsPipe
   ],
   imports: [
     BrowserModule,

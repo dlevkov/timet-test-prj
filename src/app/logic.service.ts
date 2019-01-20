@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 import { CloneSubject } from './clone-subject';
 import { TaskModel } from './models/task-model';
-import { of, Observable } from 'rxjs';
+import { of, Observable, timer, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogicService {
+  id = 1;
   readonly initialState: TaskModel[] = [
-    { id: 1, buttonText: 'pause', name: 'name', timer: of(1) },
+    { id: 1, buttonText: 'pause', name: 'name', timer: timer(0, 1000) },
   ];
   private db: TaskModel[] = [...this.initialState];
-  private state = new CloneSubject(this.db);
+  private state = new BehaviorSubject(this.db);
 
   public get tasks$(): Observable<TaskModel[]> {
     return this.state.asObservable();
   }
-  addTask(tsk: TaskModel) {
-    this.db.push(tsk);
+  addTask(tskName: string) {
+    const newTask: TaskModel = {
+      name: tskName,
+      buttonText: 'play_arrow',
+      id: this.id += 1,
+      timer: timer(0, 1000),
+    };
+    this.db.push(newTask);
     this.doNext();
   }
 
@@ -31,14 +38,12 @@ export class LogicService {
     selectedId: number
   ): TaskModel[] {
     tasks.forEach(x => this.toggleText(x));
-    tasks[selectedId].buttonText = selectedTask.buttonText;
+    this.toggleText(tasks[selectedId]);
     return tasks;
   }
   private toggleText(x: TaskModel): void {
     if (x.buttonText === 'pause') {
       x.buttonText = 'play_arrow';
-    } else {
-      x.buttonText = 'pause';
     }
   }
 
