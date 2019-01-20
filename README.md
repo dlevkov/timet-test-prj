@@ -1,5 +1,5 @@
 # DenisTestPrjTimer
-
+## current build status: [![Build Status](https://travis-ci.org/dlevkov/timet-test-prj.svg?branch=master)](https://travis-ci.org/dlevkov/timet-test-prj)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.
 
 ## Development server

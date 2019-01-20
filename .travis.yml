@@ -24,7 +24,7 @@ script:
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN
+  github-token: $git_token
   local_dir: dist/denis-test-prj-timer
 
 notifications:
