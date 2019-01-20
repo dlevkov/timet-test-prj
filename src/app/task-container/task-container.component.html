@@ -1,3 +1,3 @@
-<p>
-  task-container works!
-</p>
+<mat-card>
+  <app-task-presenter *ngFor="let task of tasks$| async" [task]="task" (clicked)="onClick($event)"></app-task-presenter>
+</mat-card>

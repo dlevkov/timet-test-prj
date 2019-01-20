@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TaskModel } from '../models/task-model';
 
 @Component({
   selector: 'app-task-presenter',
   templateUrl: './task-presenter.component.html',
-  styleUrls: ['./task-presenter.component.scss']
+  styleUrls: ['./task-presenter.component.scss'],
 })
-export class TaskPresenterComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class TaskPresenterComponent {
+  @Input() task: TaskModel;
+  @Output() clicked = new EventEmitter<TaskModel>();
 
 }

@@ -1,3 +1,8 @@
-<p>
-  task-presenter works!
-</p>
+<mat-card>
+  <p>{{ task.name }}</p>
+  <p>{{ task.timer | async }}</p>
+  <button mat-fab>
+    <mat-icon>{{ task.buttonText }}</mat-icon>
+  </button>
+  {{ task | json }}
+</mat-card>
