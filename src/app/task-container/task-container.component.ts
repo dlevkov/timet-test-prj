@@ -10,10 +10,12 @@ import { LogicService } from '../logic.service';
 })
 export class TaskContainerComponent implements OnInit {
   public tasks$: Observable<TaskModel[]>;
+  public totalTime$: Observable<number>;
   constructor(private service: LogicService) {}
 
   ngOnInit() {
     this.tasks$ = this.service.tasks$;
+    this.totalTime$ = this.service.TotalTime$;
   }
 
   public onClick(evt: TaskModel) {

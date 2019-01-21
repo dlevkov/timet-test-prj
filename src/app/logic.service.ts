@@ -1,14 +1,35 @@
 import { Injectable } from '@angular/core';
 import { CloneSubject } from './clone-subject';
 import { TaskModel } from './models/task-model';
-import { of, Observable, timer, BehaviorSubject } from 'rxjs';
+import {
+  of,
+  Observable,
+  timer,
+  BehaviorSubject,
+  forkJoin,
+  combineLatest,
+  pipe,
+  ReplaySubject,
+  Subject,
+} from 'rxjs';
 import { TaskFactoryService } from './task-factory.service';
+import {
+  tap,
+  map,
+  combineAll,
+  mergeAll,
+  withLatestFrom,
+  flatMap,
+  reduce,
+  distinct,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogicService {
-  readonly initialState: TaskModel[] = [this.taskService.createTask('test1')];
+  readonly initialState: TaskModel[] = [];
   private state: TaskModel[] = [...this.initialState];
   private logicSubj$ = new BehaviorSubject(this.state);
 
@@ -23,36 +44,54 @@ export class LogicService {
   }
 
   public updateTask(evt: TaskModel): void {
-    const index = this.state.findIndex(x => x.id === evt.id);
+    const index = this.state.findIndex(tsk => tsk.id === evt.id);
     this.state = this.toggleAllButtonTexts(this.state, index);
     this.doNext();
   }
 
-  public get TotalTime(): Observable<number> {
-    return of(0);
+  public get TotalTime$(): Observable<number> {
+    const res = new Subject<number>();
+    this.tasks$.pipe(map(x => x.map(y => y.timer))).subscribe(tmr => {
+      combineLatest(tmr)
+        .pipe(
+          map(x => x.reduce((q, w) => q + w, 0)),
+          distinctUntilChanged()
+        )
+        .subscribe(x => res.next(x));
+    });
+    return res.asObservable();
   }
   private toggleAllButtonTexts(
     tasks: TaskModel[],
     selectedId: number
   ): TaskModel[] {
-    tasks.forEach(x => this.inactivateButtons(x));
+    tasks
+      .filter(tsk => tsk.id !== selectedId)
+      .forEach(tsk => this.inactivateButtons(tsk));
     this.toggleText(tasks[selectedId]);
     return tasks;
   }
-  private inactivateButtons(x: TaskModel): void {
-    if (x.buttonText === 'pause') {
-      x.buttonText = 'play_arrow';
-      this.taskService.pause(x.id);
+  private inactivateButtons(tsk: TaskModel): void {
+    if (tsk.buttonText === 'pause') {
+      this.setPlay(tsk);
     }
   }
-  private toggleText(x: TaskModel): void {
-    if (x.buttonText === 'pause') {
-      x.buttonText = 'play_arrow';
-      this.taskService.pause(x.id);
+
+  private toggleText(tsk: TaskModel): void {
+    if (tsk.buttonText === 'pause') {
+      this.setPlay(tsk);
     } else {
-      x.buttonText = 'pause';
-      this.taskService.play(x.id);
+      this.setPause(tsk);
     }
+  }
+  private setPlay(tsk: TaskModel) {
+    tsk.buttonText = 'play_arrow';
+    this.taskService.pause(tsk.id);
+  }
+
+  private setPause(tsk: TaskModel) {
+    tsk.buttonText = 'pause';
+    this.taskService.play(tsk.id);
   }
 
   private doNext() {
