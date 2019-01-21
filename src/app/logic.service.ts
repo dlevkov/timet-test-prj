@@ -28,8 +28,8 @@ export class LogicService {
     this.doNext();
   }
 
-  public get TotalTime(): Observable<number>{
-    return 
+  public get TotalTime(): Observable<number> {
+    return of(0);
   }
   private toggleAllButtonTexts(
     tasks: TaskModel[],
@@ -42,13 +42,16 @@ export class LogicService {
   private inactivateButtons(x: TaskModel): void {
     if (x.buttonText === 'pause') {
       x.buttonText = 'play_arrow';
+      this.taskService.pause(x.id);
     }
   }
   private toggleText(x: TaskModel): void {
     if (x.buttonText === 'pause') {
       x.buttonText = 'play_arrow';
+      this.taskService.pause(x.id);
     } else {
       x.buttonText = 'pause';
+      this.taskService.play(x.id);
     }
   }
 

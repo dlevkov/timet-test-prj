@@ -19,7 +19,12 @@ export class TaskFactoryService {
     this.incrementCounter();
     return task;
   }
-
+  public play(id: number) {
+    this.timersService.playTimer(id);
+  }
+  public pause(id: number) {
+    this.timersService.pauseTimer(id);
+  }
   private incrementCounter() {
     this.counter += 1;
   }
