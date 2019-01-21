@@ -1,27 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CloneSubject } from './clone-subject';
 import { TaskModel } from './models/task-model';
 import {
-  of,
   Observable,
-  timer,
   BehaviorSubject,
-  forkJoin,
   combineLatest,
-  pipe,
-  ReplaySubject,
   Subject,
 } from 'rxjs';
 import { TaskFactoryService } from './task-factory.service';
 import {
-  tap,
   map,
-  combineAll,
-  mergeAll,
-  withLatestFrom,
-  flatMap,
-  reduce,
-  distinct,
   distinctUntilChanged,
 } from 'rxjs/operators';
 
