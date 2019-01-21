@@ -1,28 +1,23 @@
 # DenisTestPrjTimer
 
-## current build status: [![Build Status](https://travis-ci.org/dlevkov/timet-test-prj.svg?branch=master)](https://travis-ci.org/dlevkov/timet-test-prj)
+## Current build status: 
+[![Build Status](https://travis-ci.org/dlevkov/timet-test-prj.svg?branch=master)](https://travis-ci.org/dlevkov/timet-test-prj)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.
-
+*** 
 ## Deployed site
 
 Fully working example can be found [here](https://dlevkov.github.io/timet-test-prj/)
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+***
+### Requirements
 
-## Build
+#### Please create an app for managing tasks.
+ The user can input a text and click Add
+- A new task is added with the title, and 00:00 time, and a play button.
+- Clicking Play will play this task: the timer will start running, and the icon will change to a pause icon.
+ Also - any other running task will be paused.
+- Clicking Pause will pause the task.
+- The total time is always updated.
+- Please implement the redux state, actions and reducers. If you have time - implement the UI as well using >React / Angular (no need for fancy HTML/CSS).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+![alt](https://cloud.githubusercontent.com/assets/889418/23171775/299f5252-f85c-11e6-8f1c-5e66037bf5fa.png)
