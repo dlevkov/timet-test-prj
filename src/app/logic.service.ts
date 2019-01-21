@@ -2,36 +2,34 @@ import { Injectable } from '@angular/core';
 import { CloneSubject } from './clone-subject';
 import { TaskModel } from './models/task-model';
 import { of, Observable, timer, BehaviorSubject } from 'rxjs';
+import { TaskFactoryService } from './task-factory.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogicService {
-  id = 1;
-  readonly initialState: TaskModel[] = [
-    { id: 1, buttonText: 'pause', name: 'name', timer: timer(0, 1000) },
-  ];
-  private db: TaskModel[] = [...this.initialState];
-  private state = new BehaviorSubject(this.db);
+  readonly initialState: TaskModel[] = [this.taskService.createTask('test1')];
+  private state: TaskModel[] = [...this.initialState];
+  private logicSubj$ = new BehaviorSubject(this.state);
 
+  constructor(private taskService: TaskFactoryService) {}
   public get tasks$(): Observable<TaskModel[]> {
-    return this.state.asObservable();
+    return this.logicSubj$.asObservable();
   }
-  addTask(tskName: string) {
-    const newTask: TaskModel = {
-      name: tskName,
-      buttonText: 'play_arrow',
-      id: this.id += 1,
-      timer: timer(0, 1000),
-    };
-    this.db.push(newTask);
+  public addTask(tskName: string) {
+    const newTask = this.taskService.createTask(tskName);
+    this.state.push(newTask);
     this.doNext();
   }
 
-  updateTask(evt: TaskModel): void {
-    const index = this.db.findIndex(x => x.id === evt.id);
-    this.db = this.toggleAllButtonTexts(this.db, index);
+  public updateTask(evt: TaskModel): void {
+    const index = this.state.findIndex(x => x.id === evt.id);
+    this.state = this.toggleAllButtonTexts(this.state, index);
     this.doNext();
+  }
+
+  public get TotalTime(): Observable<number>{
+    return 
   }
   private toggleAllButtonTexts(
     tasks: TaskModel[],
@@ -55,6 +53,6 @@ export class LogicService {
   }
 
   private doNext() {
-    this.state.next(this.db);
+    this.logicSubj$.next(this.state);
   }
 }

@@ -1,21 +1,22 @@
-<mat-card class="card-width ">
-  <mat-form-field>
-    <form [formGroup]="form" (submit)="submitHandler()">
-      <input
-        matInput
-        placeholder="New Task"
-        formControlName="text"
-        type="text"
-      />
-      <button
+<form [formGroup]="form" novalidate (ngSubmit)="submitHandler()">
+  <mat-card class="add-card">
+    <mat-card-content>
+      <div class="row">
+        <mat-form-field>
+          <input matInput placeholder="New Task" formControlName="text" />
+          <mat-error *ngIf="form.controls['text'].hasError('required')">
+            Minimal text is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <button
         color="primary"
         mat-raised-button
         [disabled]="form.invalid"
         type="submit"
-      >
+        >
         Add
       </button>
-    </form>
-  </mat-form-field>
-
-</mat-card>
+    </div>
+    </mat-card-content>
+  </mat-card>
+</form>

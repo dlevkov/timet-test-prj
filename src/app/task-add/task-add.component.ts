@@ -11,7 +11,10 @@ export class TaskAddComponent {
   form: FormGroup;
   constructor(private fb: FormBuilder, private service: LogicService) {
     this.form = this.fb.group({
-      text: ['', [Validators.required, Validators.minLength(2)]],
+      text: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(2)]),
+      ],
     });
   }
 
