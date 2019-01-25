@@ -1,12 +1,11 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, Input, Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Input, Component } from '@angular/core';
 import { TaskModel } from '../models/task-model';
 import { LogicService } from '../logic.service';
 import { TaskContainerComponent } from './task-container.component';
 import { MatCardModule } from '@angular/material';
 import { MinuteSecondsPipe } from '../minute-seconds.pipe';
 import { of } from 'rxjs';
-import { By } from '@angular/platform-browser';
 describe('TaskContainerComponent', () => {
   let component: TaskContainerComponent;
   let fixture: ComponentFixture<TaskContainerComponent>;
