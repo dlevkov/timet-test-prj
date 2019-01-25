@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskPresenterComponent should render task 1`] = `
+<div
+  id="root1"
+  ng-version="7.2.1"
+>
+  <mat-card
+    class="row mat-card"
+  >
+    <p>
+      some name
+    </p>
+    <p>
+      10
+    </p>
+    <button
+      mat-fab=""
+    >
+      <mat-icon
+        aria-hidden="true"
+        class="mat-icon material-icons mat-icon-no-color"
+        role="img"
+      >
+        pause
+      </mat-icon>
+    </button>
+  </mat-card>
+</div>
+`;

@@ -15,7 +15,7 @@ export class TaskContainerComponent implements OnInit {
 
   ngOnInit() {
     this.tasks$ = this.service.tasks$;
-    this.totalTime$ = this.service.TotalTime$;
+    this.totalTime$ = this.service.totalTime$;
   }
 
   public onClick(evt: TaskModel) {
