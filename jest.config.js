@@ -12,4 +12,10 @@ module.exports = {
     '@state/(.*)': '<rootDir>/src/app/state/$1',
   },
   transformIgnorePatterns: ['node_modules/(?!(jest-test|lodash-es))'],
+  collectCoverageFrom: [
+    'src/app/**/*.{ts}',
+    '!src/app/**/*.module.{ts}',
+    '!<rootDir>/node_modules/',
+    '!<rootDir>/src/',
+  ],
 };
