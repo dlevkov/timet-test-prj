@@ -29,7 +29,7 @@ export class LogicService {
     this.doNext();
   }
 
-  public get TotalTime$(): Observable<number> {
+  public get totalTime$(): Observable<number> {
     const res = new Subject<number>();
     this.tasks$.pipe(map(x => x.map(y => y.timer))).subscribe(tmr => {
       combineLatest(tmr)
