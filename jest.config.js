@@ -9,9 +9,9 @@ module.exports = {
     '@core/(.*)': '<rootDir>/src/app/core/$1',
     '@env': '<rootDir>/src/environments/environment',
     '@src/(.*)': '<rootDir>/src/src/$1',
-    '@state/(.*)': '<rootDir>/src/app/state/$1',
+    '@state/(.*)': '<rootDir>/src/app/state/$1'
   },
-  transformIgnorePatterns: ['node_modules/(?!(jest-test|lodash-es))'],
+  transformIgnorePatterns: ['node_modules/(?!lodash-es)'],
   collectCoverageFrom: [
     'src/app/**/*.{ts}',
     '!src/app/**/*.module.{ts}',
