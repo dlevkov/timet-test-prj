@@ -6,7 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { LogicService } from '../logic.service';
-import { tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-add',
