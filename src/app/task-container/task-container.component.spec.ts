@@ -14,7 +14,7 @@ describe('TaskContainerComponent', () => {
   @Component({
     selector: 'app-task-presenter',
     template: `
-      <p>{{ task }}</p>
+      <p>{{ task | json }}</p>
     `,
   })
   class FakeComponent {
@@ -68,6 +68,25 @@ describe('TaskContainerComponent', () => {
         LogicService
       );
       jest.spyOn(logicServiceStub, 'totalTime$', 'get').mockReturnValue(of(35));
+      fixture.detectChanges();
+
+      fixture.whenStable().then(() => {
+        expect(fixture.nativeElement).toMatchSnapshot();
+      });
+    });
+    it('should render tasks$', () => {
+      expect.hasAssertions();
+      const logicServiceStub: LogicService = fixture.debugElement.injector.get(
+        LogicService
+      );
+      const tasks: TaskModel[] = [
+        { id: 1, name: 'test1', buttonText: 'pause', timer: of(1) },
+        { id: 2, name: 'test2', buttonText: 'pause', timer: of(1) },
+        { id: 3, name: 'test3', buttonText: 'pause', timer: of(1) },
+      ];
+      jest
+        .spyOn(logicServiceStub, 'tasks$', 'get')
+        .mockReturnValue(of([tasks]));
       fixture.detectChanges();
 
       fixture.whenStable().then(() => {
