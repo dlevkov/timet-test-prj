@@ -1,21 +1,14 @@
 import { Injectable } from '@angular/core';
 import { TaskModel } from './models/task-model';
-import {
-  Observable,
-  BehaviorSubject,
-  combineLatest,
-  Subject,
-} from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest, Subject, of } from 'rxjs';
 import { TaskFactoryService } from './task-factory.service';
-import {
-  map,
-  distinctUntilChanged,
-} from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LogicService {
+
   readonly initialState: TaskModel[] = [];
   private state: TaskModel[] = [...this.initialState];
   private logicSubj$ = new BehaviorSubject(this.state);
@@ -47,6 +40,9 @@ export class LogicService {
         .subscribe(x => res.next(x));
     });
     return res.asObservable();
+  }
+  public nameExists(value: string): Observable<boolean> {
+    return of(this.state.find(x => x.name === value) !== undefined);
   }
   private toggleAllButtonTexts(
     tasks: TaskModel[],

@@ -8,15 +8,21 @@
             Minimal text is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-        <button
-        color="primary"
-        mat-raised-button
-        [disabled]="form.invalid"
-        type="submit"
+        <div *ngIf="form.get('text').status === 'PENDING'">Checking...</div>
+        <div
+          *ngIf="form.get('text').errors && form.get('text').errors.nameTaken"
         >
-        Add
-      </button>
-    </div>
+          😢 Oh noes, this task is already exists!
+        </div>
+        <button
+          color="primary"
+          mat-raised-button
+          [disabled]="!form.valid"
+          type="submit"
+        >
+          Add
+        </button>
+      </div>
     </mat-card-content>
   </mat-card>
 </form>
