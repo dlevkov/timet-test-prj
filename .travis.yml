@@ -19,7 +19,7 @@ before_script:
 
 script:
   - ng lint
-  - npm run test --ci --coverage
+  - npm run test:ci
   - ng build --prod --base-href https://dlevkov.github.io/timet-test-prj/
 deploy:
   provider: pages
