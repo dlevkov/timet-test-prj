@@ -3,6 +3,7 @@ import { TaskModel } from './models/task-model';
 import { Observable, BehaviorSubject, combineLatest, Subject, of } from 'rxjs';
 import { TaskFactoryService } from './task-factory.service';
 import { map, distinctUntilChanged } from 'rxjs/operators';
+import { CloneSubject } from './clone-subject';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class LogicService {
 
   readonly initialState: TaskModel[] = [];
   private state: TaskModel[] = [...this.initialState];
-  private logicSubj$ = new BehaviorSubject(this.state);
+  private logicSubj$ = new CloneSubject(this.state);
 
   constructor(private taskService: TaskFactoryService) {}
   public get tasks$(): Observable<TaskModel[]> {
@@ -35,7 +36,6 @@ export class LogicService {
       combineLatest(tmr)
         .pipe(
           map(x => x.reduce((q, w) => q + w, 0)),
-          distinctUntilChanged()
         )
         .subscribe(x => res.next(x));
     });
