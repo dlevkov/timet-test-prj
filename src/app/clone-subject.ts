@@ -4,8 +4,6 @@ export class CloneSubject extends BehaviorSubject<TaskModel[]> {
   /**
    * Clones every prop, but timer
    * in order to keep pointer
-   * @param {TaskModel[]} obj
-   * @memberof CloneSubject
    */
   public next(obj: TaskModel[]) {
     const res: TaskModel[] = [];
