@@ -1,5 +1,7 @@
 import {} from '@angular/core/testing';
 import { CloneSubject } from './clone-subject';
+import { TaskModel } from './models/task-model';
+import { of } from 'rxjs';
 
 describe('CloneSubject', () => {
   it('should create', () => {
@@ -8,11 +10,13 @@ describe('CloneSubject', () => {
   });
   it('should clone given value', done => {
     expect.hasAssertions();
-    const expected = { top: { something: 'something' } };
-    const subj = new CloneSubject(undefined);
+    const expected: TaskModel[] = [
+      { id: 1, buttonText: 'pause', name: 'test1', timer: of(0) },
+    ];
+    const subj = new CloneSubject([undefined]);
     subj.next(expected);
     subj.subscribe(actual => {
-      expected.top.something = '123';
+      expected[0].name = 'test2';
       expect(actual).not.toEqual(expected);
       done();
     });

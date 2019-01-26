@@ -1,8 +1,19 @@
 import { BehaviorSubject } from 'rxjs';
-import { cloneDeep } from 'lodash-es';
-export class CloneSubject<T> extends BehaviorSubject<T> {
-  public next(obj: T) {
-    const cloned = cloneDeep(obj);
-    super.next(cloned);
+import { TaskModel } from './models/task-model';
+export class CloneSubject extends BehaviorSubject<TaskModel[]> {
+  /**
+   * Clones every prop, but timer
+   * in order to keep pointer
+   * @param {TaskModel[]} obj
+   * @memberof CloneSubject
+   */
+  public next(obj: TaskModel[]) {
+    const res: TaskModel[] = [];
+    obj.forEach(element => {
+      const newElem: TaskModel = Object.assign({}, element);
+      newElem.timer = element.timer;
+      res.push(newElem);
+    });
+    super.next(res);
   }
 }
