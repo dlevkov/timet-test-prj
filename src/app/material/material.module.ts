@@ -6,15 +6,15 @@ import {
   MatInputModule,
   MatIconModule,
 } from '@angular/material';
+const modules = [
+  CommonModule,
+  MatCardModule,
+  MatButtonModule,
+  MatInputModule,
+  MatIconModule,
+];
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatInputModule,
-    MatIconModule,
-  ],
-  exports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule],
+  imports: [...modules],
+  exports: [...modules],
 })
 export class MaterialModule {}
