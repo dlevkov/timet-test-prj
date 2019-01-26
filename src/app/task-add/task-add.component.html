@@ -1,4 +1,4 @@
-<form [formGroup]="form" novalidate (ngSubmit)="submitHandler()">
+<form [formGroup]="form" novalidate (ngSubmit)="submitHandler(form.value.text)">
   <mat-card class="add-card">
     <mat-card-content>
       <div class="row">

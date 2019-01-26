@@ -25,10 +25,14 @@ export class TaskAddComponent implements OnInit {
       ],
     });
   }
-  submitHandler() {
-    this.service.addTask(this.form.value.text);
+  submitHandler(text: string) {
+    this.service.addTask(text);
+    this.resetForm();
+  }
+  private resetForm() {
     this.form.reset();
   }
+
   validateNameExists(control: AbstractControl) {
     return this.service
       .nameExists(control.value)
