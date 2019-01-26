@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable, timer, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,8 +10,10 @@ export class TimerManagerService {
     subj$: BehaviorSubject<number>;
     isRunning: boolean;
   }[] = [];
-  constructor() {
-    this.runTimers();
+  constructor(private ngZone: NgZone) {
+    this.ngZone.runOutsideAngular(() => {
+      this.runTimers();
+    });
   }
 
   getTimer(id: number): Observable<any> {
@@ -32,11 +34,14 @@ export class TimerManagerService {
   private runTimers(): void {
     timer(0, 1000)
       .pipe(
-        tap(() =>
-          this.timers
-            .filter(x => x.isRunning)
-            .forEach(subj => subj.subj$.next(subj.subj$.value + 1))
-        )
+        filter(x => this.timers.findIndex(y => y.isRunning) >= 0),
+        tap(() => {
+          this.ngZone.run(() => {
+            this.timers
+              .filter(x => x.isRunning)
+              .forEach(subj => subj.subj$.next(subj.subj$.value + 1));
+          });
+        })
       )
       .subscribe();
   }
