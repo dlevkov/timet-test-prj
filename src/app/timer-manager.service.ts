@@ -5,6 +5,7 @@ import { tap, filter } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class TimerManagerService {
+  readonly initialValue = 0;
   private timers: {
     id: number;
     subj$: BehaviorSubject<number>;
@@ -16,13 +17,13 @@ export class TimerManagerService {
     });
   }
 
-  getTimer(id: number): Observable<any> {
+  getTimer(id: number): Observable<number> {
     const newTimer = this.createTimer();
     this.timers.push({ id, subj$: newTimer, isRunning: false });
     return newTimer.asObservable();
   }
   private createTimer() {
-    return new BehaviorSubject<number>(0);
+    return new BehaviorSubject<number>(this.initialValue);
   }
   public playTimer(id: number): void {
     this.timers.find(x => x.id === id).isRunning = true;
