@@ -1,8 +1,8 @@
-import { TestBed, fakeAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { TaskModel } from './models/task-model';
 import { TaskFactoryService } from './task-factory.service';
 import { LogicService } from './logic.service';
-import { skip, filter, bufferCount } from 'rxjs/operators';
+import { skip, bufferCount } from 'rxjs/operators';
 describe('LogicService', () => {
   let service: LogicService;
   beforeEach(() => {
