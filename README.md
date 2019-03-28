@@ -1,7 +1,7 @@
 # DenisTestPrjTimer
 
 ## Current build status: 
-[![Build Status](https://travis-ci.org/dlevkov/timet-test-prj.svg?branch=master)](https://travis-ci.org/dlevkov/timet-test-prj)
+[![Build Status](https://travis-ci.org/dlevkov/timet-test-prj.svg?branch=master)](https://travis-ci.org/dlevkov/timet-test-prj) [![Greenkeeper badge](https://badges.greenkeeper.io/dlevkov/timet-test-prj.svg)](https://greenkeeper.io/)
 
 *** 
 ## Deployed site
