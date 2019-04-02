@@ -3,7 +3,7 @@
 exports[`TaskPresenterComponent should render task 1`] = `
 <div
   id="root1"
-  ng-version="7.2.1"
+  ng-version="7.2.11"
 >
   <mat-card
     class="row mat-card"
@@ -21,7 +21,7 @@ exports[`TaskPresenterComponent should render task 1`] = `
     >
       <mat-icon
         aria-hidden="true"
-        class="mat-icon material-icons mat-icon-no-color"
+        class="mat-icon notranslate material-icons mat-icon-no-color"
         role="img"
       >
         pause

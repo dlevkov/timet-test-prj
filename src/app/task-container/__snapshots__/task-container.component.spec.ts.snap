@@ -3,7 +3,7 @@
 exports[`TaskContainerComponent DOM should render tasks$ 1`] = `
 <div
   id="root3"
-  ng-version="7.2.1"
+  ng-version="7.2.11"
 >
   <mat-card
     class="mat-card"
@@ -60,7 +60,7 @@ exports[`TaskContainerComponent DOM should render tasks$ 1`] = `
 exports[`TaskContainerComponent DOM should render totalTime$ 1`] = `
 <div
   id="root2"
-  ng-version="7.2.1"
+  ng-version="7.2.11"
 >
   <mat-card
     class="mat-card"
